@@ -8,6 +8,9 @@ const db = new Sequelize({
     logging: false
 });
 
+
+
+
 // User Model
 const User = db.define('User', {
     id: {
@@ -28,7 +31,14 @@ const User = db.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    // TODO: Add role field (employee, manager, admin)
+    role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'employee',
+        validate: {
+            isIn: [['employee', 'manager', 'admin']]
+        }
+    }
 });
 
 // Project Model
